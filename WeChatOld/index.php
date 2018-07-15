@@ -84,36 +84,36 @@ class wechatCallbackapiTest
         $keyword = trim($object->Content);
         $category = substr($keyword, 0, 6);
         $entity = trim(substr($keyword, 6, strlen($keyword)));
-        switch($category){
-            case "附近":
-                include("location.php");
-                $location = getLocation($object->FromUserName);
-                if(is_array($location)){
-                    include("mapbaidu.php");
-                    $content = catchEntitiesFromLocation($entity, $location["locationX"], $location["locationY"], "5000");
-                } else {
-                    $content = $location;
-                }
-                break;
-            case "天气":
-                    include('weather.php');
-                 $city = str_replace('天气', '', $keyword);
-                 $content = getWeatherInfo($city);          //构建回复的内容
-                //$content = "检测是否获取 关键字:".$city;
-                 //$result = $this->transmitText($object, $content);
-                 $result = $this->transmitNews($object, $content);
-                break;
+        // switch($category){
+        //     case "附近":
+        //         include("location.php");
+        //         $location = getLocation($object->FromUserName);
+        //         if(is_array($location)){
+        //             include("mapbaidu.php");
+        //             $content = catchEntitiesFromLocation($entity, $location["locationX"], $location["locationY"], "5000");
+        //         } else {
+        //             $content = $location;
+        //         }
+        //         break;
+        //     case "天气":
+        //             include('weather.php');
+        //          $city = str_replace('天气', '', $keyword);
+        //          $content = getWeatherInfo($city);          //构建回复的内容
+        //         //$content = "检测是否获取 关键字:".$city;
+        //          //$result = $this->transmitText($object, $content);
+        //          $result = $this->transmitNews($object, $content);
+        //         break;
                 
-            default:
-                $content = $object->FromUserName;
-                break;
-        }
-        if(is_array($content)){
-            $res = $this->transmitNews($object, $content);
-        } else {
-            $res = $this->transmitText($object, $content);
-        }
-        return $res;
+        //     default:
+        //         $content = $object->FromUserName;
+        //         break;
+        // }
+        // if(is_array($content)){
+        //     $res = $this->transmitNews($object, $content);
+        // } else {
+        //     $res = $this->transmitText($object, $content);
+        // }
+        // return $res;
 
         if (strstr($keyword, "天气")) {
             $city = str_replace('天气', '', $keyword);
